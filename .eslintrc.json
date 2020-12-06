@@ -26,6 +26,11 @@
                     ".jsx"
                 ]
             }
-        ]
+        ],
+        "react/self-closing-comp": [1, {
+            "component": true,
+            "html": true
+          }],
+        "no-unused-vars": "warn"
     }
 }
