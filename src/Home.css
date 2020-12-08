@@ -1,0 +1,19 @@
+.home-wrapper {
+  background: linear-gradient(to top, #ffebfa 10%, #ffffff 0%);
+  height: 100vh;
+}
+
+.home-banner-img {
+  /* width: 100vw; */
+  background-image: url('https://res.cloudinary.com/dnkftif1n/image/upload/v1607456886/projectsGitHUB/2020-12-06_4-14-59_l4wyqm.jpg');
+  background-repeat: repeat;
+  height: 60vh;
+  max-height: 430px;
+  margin: 0;
+}
+.shadow {
+  position: sticky;
+  margin-top: -60vh;
+  height: 60vh;
+  background-image: linear-gradient(90deg, rgba(39, 30, 39, 0.4), rgba(0, 0, 0, 0.8), black);
+}

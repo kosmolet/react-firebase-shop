@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
@@ -5,7 +6,6 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import './Header.css';
 
 const Header = () => {
-  const a = 0;
   return (
     <nav className="header">
       <Link to="/">
