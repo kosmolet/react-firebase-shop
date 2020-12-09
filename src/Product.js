@@ -6,7 +6,7 @@ function Product({ id, title, image, price, rating }) {
   const addToBasket = () => {};
   return (
     <div className="product-wrapper">
-      <div className="product-title">
+      <div className="product-info-wrapper">
         <p>{title}</p>
         <p className="product-price">
           <small>$</small>
