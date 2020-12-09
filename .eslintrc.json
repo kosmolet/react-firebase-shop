@@ -13,11 +13,13 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier",
+        "react-hooks"
     ],
     "rules": {
         "react/jsx-filename-extension": [
@@ -29,6 +31,7 @@
                 ]
             }
         ],
+         
         "no-unused-vars": [
             "warn",
             {

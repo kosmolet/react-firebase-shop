@@ -1,11 +1,26 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import './Product.css';
 
-function Product({ id, title, image, price, rating }) {
-  const addToBasket = () => {};
+import { useStateValue } from './store/stateProvider';
+
+function Product(prop) {
+  const [id] = useState(nanoid);
+  const { title, image, price, rating } = prop;
+  const [, dispatch] = useStateValue();
+  const addToBasket = () => {
+    dispatch({
+      type: 'ADD_TO_CART',
+      item: {
+        title,
+        image,
+        price,
+        rating
+      }
+    });
+  };
   return (
-    <div className="product-wrapper">
+    <div className="product-wrapper" key={id}>
       <div className="product-info-wrapper">
         <p>{title}</p>
         <p className="product-price">
@@ -15,7 +30,7 @@ function Product({ id, title, image, price, rating }) {
         <div className="product-rate">
           {Array(rating)
             .fill()
-            .map((_) => (
+            .map(() => (
               <p>&#11088;</p>
             ))}
         </div>
