@@ -53,6 +53,11 @@
   color: white;
   font-weight: bold;
 }
+.buttons-nav {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
 .actions-optionCart {
   display: flex;
   flex-direction: column;

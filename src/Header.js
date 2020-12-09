@@ -1,13 +1,20 @@
-/* eslint-disable arrow-body-style */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import './Header.css';
 import { useStateValue } from './store/stateProvider';
+import { auth } from './config/firebase';
 
 const Header = () => {
-  const [{ cart }] = useStateValue();
+  const [{ cart, user }] = useStateValue();
+  const userName = user ? user.email.substring(0, user.email.indexOf('@')) : 'Guest';
+
+  const handleSignOut = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
   return (
     <nav className="header">
       <Link to="/">
@@ -24,22 +31,28 @@ const Header = () => {
       </div>
 
       <div className="header-actions-wrapper">
-        <Link to="/" className="header-actions-link">
+        <Link to={!user && '/login'} className="header-actions-link">
           <div className="actions-option">
-            <span className="line1">Hi</span>
-            <span className="line2">Sign In</span>
+            <span className="line1">{`Hi ${userName}`}</span>
+            <button onClick={handleSignOut} type="button" className="line2 buttons-nav">
+              {user ? 'Sign Out' : 'Sing In'}
+            </button>
           </div>
         </Link>
-        <Link to="/" className="header-actions-link">
+        <Link to={!user && '/login'} className="header-actions-link">
           <div className="actions-option">
             <span className="line1">Returns</span>
-            <span className="line2">Orders</span>
+            <button type="button" className="line2  buttons-nav">
+              Orders
+            </button>
           </div>
         </Link>
-        <Link to="/" className="header-actions-link">
+        <Link to={!user && '/login'} className="header-actions-link">
           <div className="actions-option">
             <span className="line1">Your</span>
-            <span className="line2">Orders</span>
+            <button type="button" className="line2 buttons-nav">
+              Orders
+            </button>
           </div>
         </Link>
         <Link to="/checkout" className="header-actions-link">
