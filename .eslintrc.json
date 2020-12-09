@@ -5,7 +5,9 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended", "airbnb", "prettier"
+        "plugin:react/recommended",
+        "airbnb",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -27,10 +29,20 @@
                 ]
             }
         ],
-        "react/self-closing-comp": [1, {
-            "component": true,
-            "html": true
-          }],
-        "no-unused-vars": "warn"
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
+        ],
+        "react/self-closing-comp": [
+            1,
+            {
+                "component": true,
+                "html": true
+            }
+        ]
     }
 }
