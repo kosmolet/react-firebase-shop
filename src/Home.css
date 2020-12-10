@@ -1,5 +1,5 @@
 .home-wrapper {
-  background: linear-gradient(to top, #ffebfa 10%, #ffffff 0%);
+  background: linear-gradient(to top, rgb(238, 236, 236) 10%, #ffffff 0%);
   height: 100vh;
 }
 
