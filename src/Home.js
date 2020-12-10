@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import { nanoid } from 'nanoid';
 import Product from './Product';
-import products from './data';
 
 const Home = () => {
+  // eslint-disable-next-line no-unused-vars
   const [id] = useState(nanoid);
 
   return (

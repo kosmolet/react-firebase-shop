@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
@@ -40,6 +39,7 @@ const Login = () => {
       await history.push('/');
     } catch (err) {
       setError(err.message);
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
