@@ -32,10 +32,20 @@
 }
 
 .product-button {
-  background: plum;
+  background: #daf01b;
   padding: 10px 5px;
   border: 1px solid;
   margin-top: 10px;
   border-color: transparent;
-  color: #111;
+  color: black;
+  cursor: pointer;
+  border-radius: 12px;
+  height: 45px;
+  width: 125px;
+  padding: 15px;
+}
+
+.product-button:hover {
+  color: white;
+  background-color: #5656b8;
 }

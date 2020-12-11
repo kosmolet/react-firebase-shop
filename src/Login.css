@@ -22,12 +22,12 @@
   list-style-type: none;
 }
 .options li {
-  color: rgb(124, 120, 120);
+  color: #7c7878;
   font-size: 20px;
   font-weight: 700;
 }
 .options .active {
-  color: rgb(255, 0, 191);
+  color: #ff00bf;
 }
 
 .login-form-wrapper {
@@ -63,7 +63,7 @@
   margin-top: 10px;
   padding: 15px;
   font-size: 1rem;
-  color: #000;
+  color: black;
   border-radius: 5px;
 }
 .signIn-button {
@@ -78,7 +78,7 @@
   border-color: transparent;
 }
 .signIn-button:hover {
-  background: rgb(86, 86, 184);
+  background: #5656b8;
   color: white;
 }
 .signIn-button:disabled {
@@ -88,7 +88,7 @@
 
 .container {
   text-align: center;
-  color: rgb(44, 38, 38);
+  color: #2c2626;
   padding-top: 20px;
 }
 

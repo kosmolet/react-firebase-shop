@@ -8,7 +8,7 @@ function Product(prop) {
   const [id] = useState(nanoid);
   const { title, image, price, rating } = prop;
   const [, dispatch] = useStateValue();
-  const addToBasket = () => {
+  const addToCart = () => {
     dispatch({
       type: 'ADD_TO_CART',
       item: {
@@ -36,7 +36,7 @@ function Product(prop) {
         </div>
       </div>
       <img className="product-img" src={image} alt="" />
-      <button className="product-button" type="button" onClick={addToBasket}>
+      <button className="product-button" type="button" onClick={addToCart}>
         Add to Cart
       </button>
     </div>

@@ -1,0 +1,38 @@
+.total-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+  background-color: #f3f3f3;
+  border: 2px solid #daf01b;
+  border-radius: 13px;
+}
+
+.total-items {
+  font-weight: 700;
+}
+
+.total-promo {
+  display: flex;
+  align-items: center;
+  color: rgb(70, 68, 68);
+}
+
+.total-promo input {
+  margin-right: 5px;
+}
+
+.total-wrapper button {
+  background: #daf01b;
+  border-radius: 12px;
+  width: 100%;
+  height: 45px;
+  border: 1px solid;
+  margin-top: 10px;
+  color: #111;
+  font-weight: 700;
+  padding: 15px;
+  cursor: pointer;
+}
