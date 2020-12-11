@@ -1,14 +1,20 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
 import { auth } from './config/firebase';
 
-const Login = () => {
+const Form = (prop) => {
+  const { option } = prop;
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const validateEmail = () => {
     const pattern = new RegExp(
@@ -16,6 +22,7 @@ const Login = () => {
     );
     return pattern.test(String(email).toLowerCase());
   };
+
   useEffect(() => {
     if (validateEmail(email) && password.length > 5) {
       setDisabled(false);
@@ -23,39 +30,70 @@ const Login = () => {
       setDisabled(true);
     }
   }, [email, password]);
+
+  useEffect(() => {
+    setError('');
+  }, []);
+
   const signIn = async (e) => {
     e.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      await history.push('/');
+      if (validateEmail(email) && password.length > 5) {
+        setDisabled(false);
+        await auth.signInWithEmailAndPassword(email, password);
+        await history.push('/');
+      } else {
+        setDisabled(true);
+      }
     } catch (err) {
-      setError(error.message);
+      setError(err.message);
     }
   };
+
   const register = async (e) => {
     e.preventDefault();
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
-      await history.push('/');
+      if (validateEmail(email) && password.length > 5 && repeatPassword.length > 5) {
+        setDisabled(false);
+        await auth.createUserWithEmailAndPassword(email, password);
+        await history.push('/');
+      } else {
+        setDisabled(true);
+      }
     } catch (err) {
       setError(err.message);
+    }
+  };
+
+  const resetPassword = async (e) => {
+    e.preventDefault();
+    try {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.log('reset password');
+      // send mail
+      // await auth.createUserWithEmailAndPassword(email, password);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+  const selectActionOnSubmit = (e) => {
+    if (option === 1) {
+      signIn(e);
+    } else if (option === 2) {
+      register(e);
+    } else {
+      resetPassword(e);
     }
   };
 
   return (
-    <div className="login-wrapper">
-      <Link to="/">
-        <img
-          className="login-logo"
-          src="https://res.cloudinary.com/dnkftif1n/image/upload/v1607232370/projectsGitHUB/clipart2854838_zlwrwp.png"
-          alt="logo"
-        />
-      </Link>
-      <div className="login-form-wrapper">
-        <h1>Sign In</h1>
-        <form>
+    <div className="login-form-wrapper">
+      <form className="account-form" onSubmit={(e) => e.preventDefault()}>
+        <div
+          className={`account-form-fields ${
+            option === 1 ? 'sign-in' : option === 2 ? 'sign-up' : 'forgot'
+          }`}
+        >
           <label className="login-form-label" htmlFor="email">
             E-mail
             <input
@@ -63,7 +101,7 @@ const Login = () => {
               className="login-input"
               name="email"
               type="email"
-              placeholder="your.mail@example.com"
+              placeholder="Email"
               required
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -77,35 +115,80 @@ const Login = () => {
               className="login-input"
               name="password"
               type="password"
-              placeholder="password"
-              required
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              required={option === 1 || option === 2 ? true : false}
+              disabled={option === 3 ? true : false}
             />
           </label>
-          <button
-            type="submit"
-            onClick={signIn}
-            disabled={disabled}
-            className={!disabled ? 'signIn-button' : 'signIn-button disabled'}
-          >
-            Sign In
-          </button>
-        </form>
-
-        {disabled && (
-          <p style={{ color: 'red' }}>Invalid e-mail / password length is less than 6</p>
-        )}
-        <p>By signing-in you agree with Gun Shop AB Tearms and Conditions.</p>
+          <label className="login-form-label" htmlFor="password">
+            Repeat password
+            <input
+              id="repeat-password"
+              name="repeat-password"
+              type="password"
+              className="login-input"
+              placeholder="Repeat password"
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              required={option === 2 ? true : false}
+              disabled={option === 1 || option === 3 ? true : false}
+            />
+          </label>
+        </div>
         <button
-          type="button"
-          onClick={register}
           disabled={disabled}
-          className={!disabled ? 'register-button' : 'register-button disabled'}
+          className={!disabled ? 'signIn-button' : 'signIn-button disabled'}
+          onClick={(e) => selectActionOnSubmit(e)}
+          type="submit"
         >
-          Create Account
+          {option === 1 ? 'Sign in' : option === 2 ? 'Sign up' : 'Reset password'}
         </button>
-        {error ? <p className="error-fbs">{`Something went wrong: ${error}`}</p> : null}
+      </form>
+
+      <p>By signing-in you agree with Gun Shop AB Tearms and Conditions.</p>
+      {error ? <p className="error-fbs">{`Something went wrong: ${error}`}</p> : null}
+    </div>
+  );
+};
+
+const Login = () => {
+  const [option, setOption] = useState(1);
+
+  return (
+    <div className="login-wrapper">
+      <Link to="/">
+        <img
+          className="login-logo"
+          src="https://res.cloudinary.com/dnkftif1n/image/upload/v1607232370/projectsGitHUB/clipart2854838_zlwrwp.png"
+          alt="logo"
+        />
+      </Link>
+
+      <div className="container">
+        <header>
+          <div
+            className={`header-headings ${
+              option === 1 ? 'sign-in' : option === 2 ? 'sign-up' : 'forgot'
+            }`}
+          >
+            <span>Sign in to your account</span>
+            <span>Create an account</span>
+            <span>Reset your password</span>
+          </div>
+        </header>
+        <ul className="options">
+          <li className={option === 1 ? 'active' : ''} onClick={() => setOption(1)}>
+            Sign in
+          </li>
+          <li className={option === 2 ? 'active' : ''} onClick={() => setOption(2)}>
+            Sign up
+          </li>
+          <li className={option === 3 ? 'active' : ''} onClick={() => setOption(3)}>
+            Forgot
+          </li>
+        </ul>
+        <Form option={option} />
       </div>
     </div>
   );
