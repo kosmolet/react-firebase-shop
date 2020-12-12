@@ -36,3 +36,8 @@
   padding: 15px;
   cursor: pointer;
 }
+
+.total-wrapper button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(226, 226, 175);
+}

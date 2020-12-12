@@ -5,22 +5,26 @@ import './Product.css';
 import { useStateValue } from './store/stateProvider';
 
 function Product(prop) {
-  const [id] = useState(nanoid);
-  const { title, image, price, rating } = prop;
+  const [id2] = useState(nanoid);
+  const { title, image, price, rating, id } = prop;
   const [, dispatch] = useStateValue();
+  const amount = 1;
+
   const addToCart = () => {
     dispatch({
       type: 'ADD_TO_CART',
       item: {
+        id,
         title,
         image,
         price,
-        rating
+        rating,
+        amount
       }
     });
   };
   return (
-    <div className="product-wrapper" key={id}>
+    <div className="product-wrapper" key={id2}>
       <div className="product-info-wrapper">
         <p>{title}</p>
         <p className="product-price">

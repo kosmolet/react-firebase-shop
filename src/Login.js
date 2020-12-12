@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-nested-ternary */
+
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
@@ -118,8 +118,8 @@ const Form = (prop) => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              required={option === 1 || option === 2 ? true : false}
-              disabled={option === 3 ? true : false}
+              required={!!(option === 1 || option === 2)}
+              disabled={option === 3}
             />
           </label>
           <label className="login-form-label" htmlFor="password">
@@ -131,8 +131,8 @@ const Form = (prop) => {
               className="login-input"
               placeholder="Repeat password"
               onChange={(e) => setRepeatPassword(e.target.value)}
-              required={option === 2 ? true : false}
-              disabled={option === 1 || option === 3 ? true : false}
+              required={option === 2}
+              disabled={!!(option === 1 || option === 3)}
             />
           </label>
         </div>

@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import './Total.css';
 import { useHistory } from 'react-router-dom';
 import CurrencyFormat from 'react-currency-format';
@@ -8,13 +9,26 @@ import { getCartTotal } from './store/reducer';
 function Total() {
   const history = useHistory();
   const [{ cart }, dispatch] = useStateValue();
+  const [proceedDisable, setProceedBuutonState] = useState(false);
 
+  const countNon0Products = () => {
+    let count = 0;
+    [...cart].forEach((i) => {
+      if (i.amount > 0) {
+        count += 1;
+      }
+    });
+    if (count === 0) {
+      setProceedBuutonState(true);
+    }
+    return count;
+  };
   return (
     <div className="total-wrapper">
       <CurrencyFormat
         renderText={(value) => (
           <>
-            <p className="total-items">{`Total ${cart.length} items: ${value}`}</p>
+            <p className="total-items">{`Total ${countNon0Products()} items: ${value}`}</p>
             <small className="total-promo">
               <input type="checkbox" />
               Do you have a promo code?
@@ -28,7 +42,7 @@ function Total() {
         prefix="$"
       />
 
-      <button type="button" onClick={(e) => history.push('/payment')}>
+      <button type="button" disabled={proceedDisable} onClick={() => history.push('/payment')}>
         Proceed to Checkout
       </button>
     </div>

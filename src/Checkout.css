@@ -27,6 +27,8 @@
 
 .checkout-product-info {
   padding-left: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkout-product-info button {
@@ -38,6 +40,11 @@
   height: 34px;
   padding: 7px;
   cursor: pointer;
+}
+
+.checkout-product-info button:disabled {
+  background-color: #e7e4c3;
+  pointer-events: none;
 }
 
 .checkout-product-title {
@@ -55,4 +62,24 @@
   display: flex;
   font-size: 12px;
   margin: 10px 0 30px 0;
+}
+
+.increment-buttons {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.increment-buttons button {
+  width: 45px;
+  border-radius: 13px;
+  height: 40px;
+}
+
+.increment-buttons input {
+  width: 45px;
+  border-radius: 13px;
+  height: 40px;
+  color: grey;
 }
