@@ -88,6 +88,7 @@ const Pay = () => {
             required
           />
         </label>
+        {formErrors.email[0] ? <span>{formErrors.email[0]}</span> : null}
         <label className="pay-form-label" htmlFor="phone">
           Name
           <input
@@ -101,6 +102,7 @@ const Pay = () => {
             required
           />
         </label>
+        {formErrors.name[0] ? <span>{formErrors.name[0]}</span> : null}
         <label className="pay-form-label" htmlFor="phone">
           Phone
           <input
@@ -114,6 +116,7 @@ const Pay = () => {
             required
           />
         </label>
+        {formErrors.phone[0] ? <span>{formErrors.phone[0]}</span> : null}
         <label className="pay-form-label" htmlFor="address">
           Address
           <input
@@ -127,7 +130,7 @@ const Pay = () => {
             required
           />
         </label>
-
+        {formErrors.address[0] ? <span>{formErrors.address[0]}</span> : null}
         <label className="pay-form-label" htmlFor="city">
           City
           <input
@@ -141,7 +144,7 @@ const Pay = () => {
             required
           />
         </label>
-
+        {formErrors.city[0] ? <span>{formErrors.city[0]}</span> : null}
         <label className="pay-form-label" htmlFor="postcode">
           Postcode
           <input
@@ -155,7 +158,7 @@ const Pay = () => {
             required
           />
         </label>
-
+        {formErrors.postcode[0] ? <span>{formErrors.postcode[0]}</span> : null}
         <button disabled={disabled} className="pay-button" onClick={proceedToStripe} type="submit">
           Pay
         </button>
