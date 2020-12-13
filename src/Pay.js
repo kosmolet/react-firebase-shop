@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Pay.css';
 
 const Pay = () => {
@@ -6,7 +6,7 @@ const Pay = () => {
     email: '',
     name: '',
     phone: '',
-    adress: '',
+    address: '',
     city: '',
     postcode: ''
   };
@@ -18,16 +18,34 @@ const Pay = () => {
     email: [],
     name: [],
     phone: [],
-    adress: [],
+    address: [],
     city: [],
     postcode: []
   };
   const [formErrors, setFormErrors] = useState(formDefaultErrors);
 
+  useEffect(() => {
+    console.log('formValues', formValues);
+    console.log('formErrors', formErrors);
+  }, [formValues]);
+
   const handleValidations = (target, validators) => {
-    validators.forEarch((validation) => {
+    validators.forEach((validation) => {
       const result = validation(target.value);
-      const errors = formErrors(target.name);
+      const errors = formErrors[target.name];
+      if (result.valid) {
+        if (errors.includes(result.message)) {
+          setFormErrors((prevState) => ({
+            ...prevState,
+            [target.name]: errors.filter((error) => error !== result.message)
+          }));
+        }
+      } else if (!errors.includes(result.message)) {
+        setFormErrors((prevState) => ({
+          ...prevState,
+          [target.name]: [...errors, result.message]
+        }));
+      }
     });
   };
 
@@ -46,6 +64,11 @@ const Pay = () => {
     message: 'cannot be blank'
   });
 
+  const validatEmail = (value) => ({
+    valid: value.split('@').length > 1,
+    message: 'must be a valid email'
+  });
+
   const proceedToStripe = () => {
     // do stripe
   };
@@ -61,7 +84,7 @@ const Pay = () => {
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => handleChange(e, [noBlanks])}
+            onChange={(e) => handleChange(e, [noBlanks, validatEmail])}
             required
           />
         </label>
@@ -74,7 +97,7 @@ const Pay = () => {
             type="name"
             placeholder="Name"
             onChange={(e) => handleChange(e, [noBlanks])}
-            value={phone}
+            value={name}
             required
           />
         </label>
@@ -87,7 +110,7 @@ const Pay = () => {
             type="phone"
             placeholder="Phone"
             onChange={(e) => handleChange(e, [noBlanks])}
-            value={name}
+            value={phone}
             required
           />
         </label>
