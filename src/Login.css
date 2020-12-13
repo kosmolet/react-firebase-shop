@@ -1,3 +1,12 @@
+.body {
+  background: #ffeeee; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ddefbb,
+    #ffeeee
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .login-wrapper {
   display: flex;
   flex-direction: column;
@@ -38,6 +47,13 @@
   border-radius: 5px;
   border: 1px solid lightgray;
   padding: 20px;
+  background: #ffeeee; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ddefbb,
+    #ffeeee
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .login-form-wrapper p {

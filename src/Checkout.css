@@ -42,6 +42,10 @@
   cursor: pointer;
 }
 
+.checkout-product-info .remove-from-cart {
+  background-color: rgb(201, 200, 162);
+}
+
 .checkout-product-info button:disabled {
   background-color: #e7e4c3;
   pointer-events: none;
@@ -68,7 +72,7 @@
   width: 200px;
   display: flex;
   justify-content: space-around;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .increment-buttons button {

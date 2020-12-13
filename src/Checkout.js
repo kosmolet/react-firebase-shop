@@ -95,7 +95,7 @@ function CheckoutProduct(prop) {
           </button>
         </div>
         {!hideButton && (
-          <button type="button" onClick={removeFromCart}>
+          <button className="remove-from-cart" type="button" onClick={removeFromCart}>
             Remove from Cart
           </button>
         )}
@@ -106,8 +106,8 @@ function CheckoutProduct(prop) {
 
 const Checkout = () => {
   const [{ cart, user }, dispatch] = useStateValue();
-  const obj = [...cart];
-  obj.sort((a, b) => a.id - b.id);
+  const prodCart = [...cart];
+  prodCart.sort((a, b) => a.id - b.id);
   return (
     <div className="checkout-wrapper">
       <div className="checkout-column-left">
@@ -115,7 +115,7 @@ const Checkout = () => {
           <h3>{user ? `Hello, ${user?.email}` : 'Hello!'}</h3>
           <h2 className="checkout-title">Your shopping Cart</h2>
 
-          {obj.map((item) => (
+          {prodCart.map((item) => (
             <CheckoutProduct
               id={item.id}
               title={item.title}
