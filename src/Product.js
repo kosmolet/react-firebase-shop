@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import './Product.css';
 
 import { useStateValue } from './store/stateProvider';
 
-function Product(prop) {
+function Product({ title, image, price, rating, id }) {
   const [id2] = useState(nanoid);
-  const { title, image, price, rating, id } = prop;
+
   const [, dispatch] = useStateValue();
   const amount = 1;
 

@@ -1,12 +1,30 @@
-.account-form {
-  align-items: center;
-  width: 50vw;
+.payment-wrapper {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
   background: #ffeeee;
   background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee);
   background: linear-gradient(to right, #ddefbb, #ffeeee);
+  height: 100vh;
+}
+.pay-form {
+  align-items: flex-start;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+.pay-summary-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 40vh;
+}
+
+.delivery-address {
+  padding-top: 5vh;
+  border-radius: 13px;
+  border-color: #353a07;
 }
 
 .pay-form-label {
@@ -20,6 +38,7 @@
 .pay-input {
   padding: 15px;
   border-radius: 13px;
+  border-color: transparent;
 }
 .pay-button {
   width: 60vh;
@@ -43,4 +62,30 @@ button:disabled {
   color: #ff00bf;
   margin: 0;
   font-weight: 500;
+}
+.products-to-deliver-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.product-pay-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.image-pay-summary {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 15px;
+}
+
+.product-pay-wrapper p {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.items {
+  font-size: 12px;
+  font-weight: 700;
+  align-items: center;
 }
