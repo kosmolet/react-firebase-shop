@@ -1,0 +1,46 @@
+.account-form {
+  align-items: center;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: #ffeeee;
+  background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee);
+  background: linear-gradient(to right, #ddefbb, #ffeeee);
+}
+
+.pay-form-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50vh;
+  padding-top: 10px;
+}
+
+.pay-input {
+  padding: 15px;
+  border-radius: 13px;
+}
+.pay-button {
+  width: 60vh;
+  padding: 15px;
+  border-radius: 13px;
+  background-color: #daf01b;
+  color: black;
+  font-weight: 800;
+  margin-top: 30px;
+}
+button:hover {
+  background-color: #5656b8;
+}
+
+button:disabled {
+  background-color: #c9d17f;
+  color: grey;
+}
+.pay-errors {
+  padding: 0;
+  color: #ff00bf;
+  margin: 0;
+  font-weight: 500;
+}

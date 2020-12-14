@@ -3,8 +3,8 @@
 .eslintcache
 firebase.js
 .cache
-.firebase
-
+firebase
+.cache
 
 # dependencies
 /node_modules

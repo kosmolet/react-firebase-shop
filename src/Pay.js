@@ -25,8 +25,13 @@ const Pay = () => {
   const [formErrors, setFormErrors] = useState(formDefaultErrors);
 
   useEffect(() => {
-    console.log('formValues', formValues);
-    console.log('formErrors', formErrors);
+    const errorArr = Object.values(formErrors);
+    const isError = (i) => i.length > 0;
+    if (errorArr.some(isError)) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
   }, [formValues]);
 
   const handleValidations = (target, validators) => {
@@ -64,14 +69,20 @@ const Pay = () => {
     message: 'cannot be blank'
   });
 
-  const validatEmail = (value) => ({
-    valid: value.split('@').length > 1,
-    message: 'must be a valid email'
-  });
+  const validatEmail = (value) => {
+    const pattern = new RegExp(
+      /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+    );
+    return {
+      valid: pattern.test(String(value).toLowerCase()),
+      message: 'must be a valid email'
+    };
+  };
 
   const proceedToStripe = () => {
     // do stripe
   };
+
   return (
     <div>
       <form className="account-form" onSubmit={(e) => e.preventDefault()}>
@@ -88,7 +99,7 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.email[0] ? <span>{formErrors.email[0]}</span> : null}
+        {formErrors.email[0] ? <span className="pay-errors">{formErrors.email[0]}</span> : null}
         <label className="pay-form-label" htmlFor="phone">
           Name
           <input
@@ -102,7 +113,7 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.name[0] ? <span>{formErrors.name[0]}</span> : null}
+        {formErrors.name[0] ? <span className="pay-errors">{formErrors.name[0]}</span> : null}
         <label className="pay-form-label" htmlFor="phone">
           Phone
           <input
@@ -116,7 +127,7 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.phone[0] ? <span>{formErrors.phone[0]}</span> : null}
+        {formErrors.phone[0] ? <span className="pay-errors">{formErrors.phone[0]}</span> : null}
         <label className="pay-form-label" htmlFor="address">
           Address
           <input
@@ -130,7 +141,7 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.address[0] ? <span>{formErrors.address[0]}</span> : null}
+        {formErrors.address[0] ? <span className="pay-errors">{formErrors.address[0]}</span> : null}
         <label className="pay-form-label" htmlFor="city">
           City
           <input
@@ -144,7 +155,7 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.city[0] ? <span>{formErrors.city[0]}</span> : null}
+        {formErrors.city[0] ? <span className="pay-errors">{formErrors.city[0]}</span> : null}
         <label className="pay-form-label" htmlFor="postcode">
           Postcode
           <input
@@ -158,7 +169,9 @@ const Pay = () => {
             required
           />
         </label>
-        {formErrors.postcode[0] ? <span>{formErrors.postcode[0]}</span> : null}
+        {formErrors.postcode[0] ? (
+          <span className="pay-errors">{formErrors.postcode[0]}</span>
+        ) : null}
         <button disabled={disabled} className="pay-button" onClick={proceedToStripe} type="submit">
           Pay
         </button>
