@@ -18,6 +18,8 @@ const Pay = () => {
   const [formValues, setFormValues] = useState(formDefaultValues);
   const [{ cart, user }, dispatch] = useStateValue();
   const [disabled, setDisabled] = useState(true);
+  const [disabledCard, setDisabledCard] = useState(true);
+  const [errorCard, setErrorCard] = useState(true);
   const [total, setTotal] = useState(0);
   const { email, name, phone, city, address, postcode } = formValues;
 
@@ -97,9 +99,10 @@ const Pay = () => {
     };
   };
 
-  const handleChangeCard = (e) => ({
-    //
-  });
+  const handleChangeCard = (e) => {
+    setDisabledCard(e.empty);
+    setErrorCard(e.error ? e.error.message : '');
+  };
   const proceedToStripe = () => {
     // do stripe
   };
@@ -197,10 +200,11 @@ const Pay = () => {
           </label>
           {formErrors.city[0] ? <span className="pay-errors">{formErrors.city[0]}</span> : null}
           <div className="stripe-element">
-            <CardElement onChange={(e) => handleChangeCard(e)} />
+            <CardElement name="card" onChange={(e) => handleChangeCard(e)} />
+            {errorCard && <div>{errorCard}</div>}
           </div>
           <button
-            disabled={disabled}
+            disabled={disabled || disabledCard}
             className="pay-button"
             onClick={proceedToStripe}
             type="submit"
