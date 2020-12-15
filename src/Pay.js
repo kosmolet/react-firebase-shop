@@ -1,8 +1,12 @@
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
 import './Pay.css';
 import { useStateValue } from './store/stateProvider';
 
 const Pay = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+
   const formDefaultValues = {
     email: '',
     name: '',
@@ -93,6 +97,9 @@ const Pay = () => {
     };
   };
 
+  const handleChangeCard = (e) => ({
+    //
+  });
   const proceedToStripe = () => {
     // do stripe
   };
@@ -189,7 +196,9 @@ const Pay = () => {
             />
           </label>
           {formErrors.city[0] ? <span className="pay-errors">{formErrors.city[0]}</span> : null}
-
+          <div className="stripe-element">
+            <CardElement onChange={(e) => handleChangeCard(e)} />
+          </div>
           <button
             disabled={disabled}
             className="pay-button"
@@ -200,6 +209,7 @@ const Pay = () => {
           </button>
         </form>
       </div>
+
       <div className="pay-summary-wrapper">
         <div className="delivery-address">
           <h3>Delivery Address: </h3>

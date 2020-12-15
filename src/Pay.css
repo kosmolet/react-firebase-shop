@@ -1,6 +1,5 @@
 .payment-wrapper {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   background: #ffeeee;
   background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee);
@@ -9,7 +8,7 @@
 }
 .pay-form {
   align-items: flex-start;
-  width: 50vw;
+  width: 40vw;
   display: flex;
   flex-direction: column;
 }
@@ -18,7 +17,7 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
-  width: 40vh;
+  width: 30vh;
 }
 
 .delivery-address {
@@ -31,7 +30,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 50vh;
+  width: 30vh;
   padding-top: 10px;
 }
 
@@ -41,7 +40,7 @@
   border-color: transparent;
 }
 .pay-button {
-  width: 60vh;
+  width: 30vh;
   padding: 15px;
   border-radius: 13px;
   background-color: #daf01b;
@@ -88,4 +87,8 @@ button:disabled {
   font-size: 12px;
   font-weight: 700;
   align-items: center;
+}
+.stripe-element {
+  padding-top: 40px;
+  height: 5vmax;
 }
