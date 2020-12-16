@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './Pay.css';
 import { useStateValue } from './store/stateProvider';
 import { db } from './config/firebase';
@@ -67,11 +67,16 @@ const Pay = () => {
         method: 'post',
         url: `/payments/create?total=${totalAmount * 100}`
       });
-      console.log(response.data, 'response');
       setClientSecret(response.data.clientSecret);
     };
-
-    getClientSecret();
+    if (totalAmount > 0) {
+      try {
+        getClientSecret();
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+    }
   }, [cart]);
 
   const handleValidations = (target, validators) => {
@@ -133,10 +138,22 @@ const Pay = () => {
         }
       })
       .then(({ paymentIntent }) => {
-        //
+        db.collection('users')
+          .doc(user?.uid)
+          .collection('orders')
+          .doc(paymentIntent.id)
+          .set({
+            cart,
+            amount: paymentIntent.amount / 100,
+            created: paymentIntent.created
+          });
         setSucceededCard(true);
         setErrorCard(null);
         setProcessing(false);
+
+        dispatch({
+          type: 'EMPTY_CART'
+        });
 
         history.replace('/orders');
       });

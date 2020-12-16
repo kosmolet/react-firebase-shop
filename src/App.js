@@ -10,6 +10,7 @@ import { useStateValue } from './store/stateProvider';
 import { auth } from './config/firebase';
 import Checkout from './Checkout';
 import Pay from './Pay';
+import Orders from './Orders';
 
 const promise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_STRIPE);
 
@@ -38,6 +39,10 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+          </Route>
+          <Route path="/orders">
+            <Header />
+            <Orders />
           </Route>
           <Route path="/payment">
             <Header />
