@@ -1,7 +1,10 @@
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import './Pay.css';
 import { useStateValue } from './store/stateProvider';
+import { db } from './config/firebase';
+import axios from './axios';
 
 const Pay = () => {
   const stripe = useStripe();
@@ -17,11 +20,15 @@ const Pay = () => {
   };
   const [formValues, setFormValues] = useState(formDefaultValues);
   const [{ cart, user }, dispatch] = useStateValue();
+  const history = useHistory();
   const [disabled, setDisabled] = useState(true);
-  const [disabledCard, setDisabledCard] = useState(true);
-  const [errorCard, setErrorCard] = useState(true);
   const [total, setTotal] = useState(0);
   const { email, name, phone, city, address, postcode } = formValues;
+  const [disabledCard, setDisabledCard] = useState(true);
+  const [errorCard, setErrorCard] = useState(true);
+  const [succeededCard, setSucceededCard] = useState(false);
+  const [processingCard, setProcessing] = useState('');
+  const [clientSecret, setClientSecret] = useState(true);
 
   const formDefaultErrors = {
     email: [],
@@ -52,6 +59,16 @@ const Pay = () => {
       totalAmount += cart[i].price * cart[i].amount;
     }
     setTotal(totalAmount);
+
+    const getClientSecret = async () => {
+      const response = await axios({
+        method: 'post',
+        url: `/payments/create?total=${totalAmount * 100}`
+      });
+      setClientSecret(response.data.clientSecret);
+    };
+
+    getClientSecret();
   }, [cart]);
 
   const handleValidations = (target, validators) => {
@@ -103,8 +120,23 @@ const Pay = () => {
     setDisabledCard(e.empty);
     setErrorCard(e.error ? e.error.message : '');
   };
-  const proceedToStripe = () => {
-    // do stripe
+  const proceedToStripe = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement)
+        }
+      })
+      .then(({ paymentIntent }) => {
+        //
+        setSucceededCard(true);
+        setErrorCard(null);
+        setProcessing(false);
+
+        history.replace('/orders');
+      });
   };
 
   return (
@@ -201,12 +233,13 @@ const Pay = () => {
           {formErrors.city[0] ? <span className="pay-errors">{formErrors.city[0]}</span> : null}
           <div className="stripe-element">
             <CardElement name="card" onChange={(e) => handleChangeCard(e)} />
-            {errorCard && <div>{errorCard}</div>}
+            <span>{processingCard ? <p>Processing</p> : ' '}</span>
+            {errorCard && <div className="pay-errors">{errorCard}</div>}
           </div>
           <button
-            disabled={disabled || disabledCard}
+            disabled={disabled || disabledCard || processingCard || succeededCard}
             className="pay-button"
-            onClick={proceedToStripe}
+            onClick={(e) => proceedToStripe(e)}
             type="submit"
           >
             Pay
@@ -226,7 +259,6 @@ const Pay = () => {
         </div>
         <div className="products-to-deliver-wrapper">
           <h3>Products to be delivered: </h3>
-          {console.log(cart)}
           {cart.map((item) => (
             <div className="product-pay-wrapper">
               <img className="image-pay-summary" src={item?.image} alt="product" />
