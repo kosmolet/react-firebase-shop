@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Checkout.css';
 import Total from './Total';
 import { useStateValue } from './store/stateProvider';
 import CheckoutProduct from './CheckoutProduct';
 
 const Checkout = () => {
-  const [{ cart, user }, dispatch] = useStateValue();
+  const [{ cart, user }] = useStateValue();
   const prodCart = [...cart];
   prodCart.sort((a, b) => a.id - b.id);
   return (
