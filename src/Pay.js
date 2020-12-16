@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './Pay.css';
 import { useStateValue } from './store/stateProvider';
 import { db } from './config/firebase';
-import axios from './axios';
+import axios from './config/axios';
 
 const Pay = () => {
   const [{ cart, user }, dispatch] = useStateValue();
@@ -30,7 +30,7 @@ const Pay = () => {
   const [errorCard, setErrorCard] = useState(true);
   const [succeededCard, setSucceededCard] = useState(false);
   const [processingCard, setProcessing] = useState('');
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState('');
 
   const formDefaultErrors = {
     email: [],
@@ -67,6 +67,7 @@ const Pay = () => {
         method: 'post',
         url: `/payments/create?total=${totalAmount * 100}`
       });
+      console.log(response.data, 'response');
       setClientSecret(response.data.clientSecret);
     };
 

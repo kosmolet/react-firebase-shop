@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import './Product.css';
 
 import { useStateValue } from './store/stateProvider';
 
 function Product({ title, image, price, rating, id }) {
-  const [id2] = useState(nanoid);
-
   const [, dispatch] = useStateValue();
   const amount = 1;
 
@@ -25,8 +23,8 @@ function Product({ title, image, price, rating, id }) {
     });
   };
   return (
-    <div className="product-wrapper" key={id2}>
-      <div className="product-info-wrapper">
+    <div className="product-wrapper">
+      <div className="product-info-wrapper" key={nanoid()}>
         <p>{title}</p>
         <p className="product-price">
           <small>$</small>
