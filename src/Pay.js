@@ -7,6 +7,8 @@ import { db } from './config/firebase';
 import axios from './axios';
 
 const Pay = () => {
+  const [{ cart, user }, dispatch] = useStateValue();
+  const history = useHistory();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -19,11 +21,10 @@ const Pay = () => {
     postcode: ''
   };
   const [formValues, setFormValues] = useState(formDefaultValues);
-  const [{ cart, user }, dispatch] = useStateValue();
-  const history = useHistory();
+
+  const { email, name, phone, city, address, postcode } = formValues;
   const [disabled, setDisabled] = useState(true);
   const [total, setTotal] = useState(0);
-  const { email, name, phone, city, address, postcode } = formValues;
   const [disabledCard, setDisabledCard] = useState(true);
   const [errorCard, setErrorCard] = useState(true);
   const [succeededCard, setSucceededCard] = useState(false);
