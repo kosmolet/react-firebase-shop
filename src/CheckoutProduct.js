@@ -1,9 +1,10 @@
+import { nanoid } from 'nanoid';
 import React, { useState, useEffect } from 'react';
 import './Checkout.css';
 import { useStateValue } from './store/stateProvider';
 
 const CheckoutProduct = (prop) => {
-  const { id, image, title, price, rating, hideButton } = prop;
+  const { id, image, title, price, rating, hideButtons } = prop;
   const initAmount = prop.amount;
   const [, dispatch] = useStateValue();
   const [amount, setAmount] = useState();
@@ -63,38 +64,41 @@ const CheckoutProduct = (prop) => {
           {Array(rating)
             .fill()
             .map(() => (
-              <p>&#11088;</p>
+              <p key={nanoid()}>&#11088;</p>
             ))}
         </div>
 
-        <div className="increment-buttons">
-          <button
-            type="button"
-            className={amount < 1 ? 'disabled' : ''}
-            disabled={amount < 1}
-            onClick={decreaseInCart}
-          >
-            -
-          </button>
-          <input
-            id="amount"
-            className="amount-input"
-            name="amount"
-            type="amount"
-            placeholder="Amount"
-            required
-            disabled
-            onChange={(e) => setAmount(e.target.value)}
-            value={amount}
-          />
-          <button type="button" onClick={addToCart}>
-            +
-          </button>
-        </div>
-        {!hideButton && (
-          <button className="remove-from-cart" type="button" onClick={removeFromCart}>
-            Remove from Cart
-          </button>
+        {!hideButtons && (
+          <div>
+            <div className="increment-buttons">
+              <button
+                type="button"
+                className={amount < 1 ? 'disabled' : ''}
+                disabled={amount < 1}
+                onClick={decreaseInCart}
+              >
+                -
+              </button>
+              <input
+                id="amount"
+                className="amount-input"
+                name="amount"
+                type="amount"
+                placeholder="Amount"
+                required
+                disabled
+                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+              />
+              <button type="button" onClick={addToCart}>
+                +
+              </button>
+            </div>
+
+            <button className="remove-from-cart" type="button" onClick={removeFromCart}>
+              Remove from Cart
+            </button>
+          </div>
         )}
       </div>
     </div>

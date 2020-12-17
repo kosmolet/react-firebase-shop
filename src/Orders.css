@@ -1,0 +1,14 @@
+.orders-page {
+  padding: 5vh 8vmin;
+  background: #ffeeee;
+  background: -webkit-linear-gradient(to right, #ddefbb, #ffeeee);
+  background: linear-gradient(to right, #ddefbb, #ffeeee);
+}
+
+.orders-page > h1 {
+  margin: 3vmin 0;
+}
+
+.mapped-orders-wr {
+  max-width: 100%;
+}

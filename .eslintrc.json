@@ -31,7 +31,6 @@
                 ]
             }
         ],
-         
         "no-unused-vars": [
             "warn",
             {
@@ -45,6 +44,15 @@
             {
                 "component": true,
                 "html": true
+            }
+        ],
+        "react/prop-types": [
+            0,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
             }
         ]
     }

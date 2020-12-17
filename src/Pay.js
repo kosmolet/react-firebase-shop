@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -131,32 +130,38 @@ const Pay = () => {
   const proceedToStripe = async (e) => {
     e.preventDefault();
     setProcessing(true);
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement)
-        }
-      })
-      .then(({ paymentIntent }) => {
-        db.collection('users')
-          .doc(user?.uid)
-          .collection('orders')
-          .doc(paymentIntent.id)
-          .set({
-            cart,
-            amount: paymentIntent.amount / 100,
-            created: paymentIntent.created
-          });
-        setSucceededCard(true);
-        setErrorCard(null);
-        setProcessing(false);
+    try {
+      await stripe
+        .confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement)
+          }
+        })
 
-        dispatch({
-          type: 'EMPTY_CART'
+        .then(({ paymentIntent }) => {
+          db.collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+              cart,
+              amount: paymentIntent.amount / 100,
+              created: paymentIntent.created
+            });
         });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+    setSucceededCard(true);
+    setErrorCard(null);
+    setProcessing(false);
 
-        history.replace('/orders');
-      });
+    dispatch({
+      type: 'EMPTY_CART'
+    });
+
+    history.replace('/orders');
   };
 
   return (
@@ -256,8 +261,9 @@ const Pay = () => {
             <span>{processingCard ? <p>Processing</p> : ' '}</span>
             {errorCard && <div className="pay-errors">{errorCard}</div>}
           </div>
+          {!user ? <h3>please login to continue</h3> : null}
           <button
-            disabled={disabled || disabledCard || processingCard || succeededCard}
+            disabled={disabled || disabledCard || processingCard || succeededCard || !user}
             className="pay-button"
             onClick={(e) => proceedToStripe(e)}
             type="submit"
@@ -280,7 +286,7 @@ const Pay = () => {
         <div className="products-to-deliver-wrapper">
           <h3>Products to be delivered: </h3>
           {cart.map((item) => (
-            <div className="product-pay-wrapper">
+            <div className="product-pay-wrapper" key={item.price + item.title}>
               <img className="image-pay-summary" src={item?.image} alt="product" />
               <div>
                 <p>{item?.title}</p>

@@ -31,7 +31,7 @@ const Header = () => {
       </div>
 
       <div className="header-actions-wrapper">
-        <Link to={!user && '/login'} className="header-actions-link">
+        <Link to={!user ? '/login' : '/'} className="header-actions-link">
           <div className="actions-option">
             <span className="line1">{`Hi ${userName}`}</span>
             <button onClick={handleSignOut} type="button" className="line2 buttons-nav">
@@ -39,15 +39,7 @@ const Header = () => {
             </button>
           </div>
         </Link>
-        {/* <Link to={!user && '/login'} className="header-actions-link">
-          <div className="actions-option">
-            <span className="line1">Returns</span>
-            <button type="button" className="line2  buttons-nav">
-              Orders
-            </button>
-          </div>
-        </Link> */}
-        <Link to={!user && '/login'} className="header-actions-link">
+        <Link to={!user ? '/login' : '/orders'} className="header-actions-link">
           <div className="actions-option">
             <span className="line1">Your</span>
             <button type="button" className="line2 buttons-nav">

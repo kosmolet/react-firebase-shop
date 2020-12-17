@@ -24,7 +24,7 @@ function Product({ title, image, price, rating, id }) {
   };
   return (
     <div className="product-wrapper">
-      <div className="product-info-wrapper" key={nanoid()}>
+      <div className="product-info-wrapper">
         <p>{title}</p>
         <p className="product-price">
           <small>$</small>
@@ -34,7 +34,7 @@ function Product({ title, image, price, rating, id }) {
           {Array(rating)
             .fill()
             .map(() => (
-              <p>&#11088;</p>
+              <p key={nanoid()}>&#11088;</p>
             ))}
         </div>
       </div>

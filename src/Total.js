@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './Total.css';
 import { useHistory } from 'react-router-dom';
@@ -8,12 +7,12 @@ import { getCartTotal } from './store/reducer';
 
 function Total() {
   const history = useHistory();
-  const [{ cart }, dispatch] = useStateValue();
+  const [{ cart }] = useStateValue();
   const [proceedDisable, setProceedBuutonState] = useState(false);
 
   const countNon0Products = () => {
     let count = 0;
-    [...cart].forEach((i) => {
+    cart.forEach((i) => {
       if (i.amount > 0) {
         count += 1;
       }
@@ -28,11 +27,11 @@ function Total() {
       <CurrencyFormat
         renderText={(value) => (
           <>
-            <p className="total-items">{`Total ${countNon0Products()} items: ${value}`}</p>
-            <small className="total-promo">
+            <p className="total-items">{`Total ${countNon0Products()} products: ${value}`}</p>
+            {/* <small className="total-promo">
               <input type="checkbox" />
               Do you have a promo code?
-            </small>
+            </small> */}
           </>
         )}
         decimalScale={2}

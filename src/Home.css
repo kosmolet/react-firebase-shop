@@ -1,10 +1,9 @@
 .home-wrapper {
-  background: linear-gradient(to top, rgb(238, 236, 236) 10%, #ffffff 0%);
   height: 100vh;
 }
 
 .home-banner-img {
-  /* width: 100vw; */
+  width: 100vw;
   background-image: url('https://res.cloudinary.com/dnkftif1n/image/upload/v1607456886/projectsGitHUB/2020-12-06_4-14-59_l4wyqm.jpg');
   background-repeat: repeat;
   height: 60vh;
@@ -17,15 +16,18 @@
   position: sticky;
   margin-top: -60vh;
   height: 60vh;
-  background-image: linear-gradient(360deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.8), rgb(0, 0, 0));
+  background: linear-gradient(to top, #f0f0f0 0%, #000000 25%);
 }
 .home-row {
-  display: flex;
   z-index: 1;
   margin-left: 5px;
   margin-right: 5px;
+  display: flex;
+  flex-flow: row wrap;
 }
-
+.home-row > * {
+  flex: 1 1 400px;
+}
 .shop-name {
   margin-top: -30vh;
   width: 100%;
