@@ -1,6 +1,7 @@
 # Panda Gun Shop 
 
 ## Overview
+
 This a shop to sell water weapons  
 * User can Sign In, Sign Up to the personal account  
 * List of Products is available on the Home page  
@@ -12,10 +13,28 @@ This a shop to sell water weapons
 * Authenticated users can observe history of purchases on the Orders page  
 
 ## Architecture Specification  
-For this project implementation it was decided that the server was developed with **Express.js, Firebase functions, firestore, authentification** and the web client with **React.js** library, that is used for building user interfaces. The database uses Firebase **Firestore** as storage. **React Context API** is used for state management.
+
+For this project implementation it was decided that the server was developed with **Express.js, Firebase functions, firestore, authentification**   
+and the web client with **React.js** library, that is used for building user interfaces.  
+The database uses Firebase **Firestore** as storage.  
+**React Context API** is used for state management.  
 Application is **deployed on Firebase** functions and hosting.
  
+## Installation and Set Up  
 
+1. Create [Firebase](https://console.firebase.google.com/u/0/) account. Navigate to Firebase console and create Project there. Check "Also set up Firebase Hosting" checkbox.
+2. ```npm i -g firebase-tools```  
+```firebase login```   
+```firebase init```
+3. In Project Settings select **Config** and copy JSON Config.
+4. Replace firebaseConfig in config/firebase.js file with your config.
+5. Turn on ```Password and email Sign-in method``` in Authentication in Firebase project.
+6. Create a database in Cloud Firestore in Firebase project.
+7. Create [Stripe](https://stripe.com/en-se) account and copy Public and Secret keys. 
+8. Add Public Stripe key as ```REACT_APP_PUBLIC_KEY_STRIPE='your_key'``` in .env.development.local file in root folder.
+9. Add Secret Stripe key as ```STRIPE_SK='your_key'``` in .env in functions root directory.
+
+10. ```cd functions``` to navigate to 
 
 
 1. **Home page**  
