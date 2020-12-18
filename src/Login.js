@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-nested-ternary */
-
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Login.css';
@@ -136,7 +134,7 @@ const Form = (prop) => {
           </label>
         </div>
         <button
-          disabled={false}
+          disabled={disabled && option !== 3}
           className={!disabled ? 'signIn-button' : 'signIn-button disabled'}
           onClick={(e) => selectActionOnSubmit(e)}
           type="submit"
@@ -144,7 +142,7 @@ const Form = (prop) => {
           {option === 1 ? 'Sign in' : option === 2 ? 'Sign up' : 'Reset password'}
         </button>
       </form>
-      {resetAlert && <h3>{`${resetAlert}`}</h3>}
+      {resetAlert && option === 3 && <h3>{`${resetAlert}`}</h3>}
       <p>By signing-in you agree with Gun Shop AB Tearms and Conditions.</p>
       {error ? <p className="error-fbs">{`Something went wrong: ${error}`}</p> : null}
     </div>

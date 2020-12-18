@@ -53,6 +53,12 @@
                     ".jsx"
                 ]
             }
+        ],
+        "no-nested-ternary": [
+            0,
+            {
+                "allowParensWrapped": true
+            }
         ]
     }
 }
