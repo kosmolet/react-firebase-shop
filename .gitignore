@@ -5,6 +5,8 @@ firebase.js
 .cache
 firebase
 .cache
+hosting*
+n
 
 # dependencies
 /node_modules
