@@ -14,9 +14,9 @@ This a shop to sell water weapons
 
 ## Architecture Specification  
 
-For this project implementation it was decided that the server was developed with **Express.js, Firebase functions, firestore, authentification**   
+For this project implementation it is decided that the server is developed with **Express.js, Firebase functions, firestore, authentification**   
 and the web client with **React.js** library, that is used for building user interfaces.  
-The database uses Firebase **Firestore** as storage.  
+The database uses Firebase **Cloud Firestore** as a storage.  
 **React Context API** is used for state management.  
 Application is **deployed on Firebase** functions and hosting.
  
@@ -27,8 +27,8 @@ Application is **deployed on Firebase** functions and hosting.
 2. ```npm i -g firebase-tools```  
 ```firebase login```   
 ```firebase init```
-3. In Project Settings select **Config** and copy JSON Config.
-4. Replace firebaseConfig in config/firebase.js file with your config.
+3. In the Project Settings select **Config** option and copy JSON Config.
+4. Replace firebaseConfig in the *config/firebase.js* file with your config.
 5. Turn on ```Password and email Sign-in method``` in Authentication in Firebase project.
 6. Create a database in Cloud Firestore in Firebase project.
 7. Create [Stripe](https://stripe.com/en-se) account and copy Public and Secret keys. 
