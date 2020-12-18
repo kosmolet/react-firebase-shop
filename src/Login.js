@@ -15,6 +15,7 @@ const Form = (prop) => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(null);
+  const [resetAlert, setResetAlert] = useState('');
 
   const validateEmail = () => {
     const pattern = new RegExp(
@@ -68,10 +69,8 @@ const Form = (prop) => {
   const resetPassword = async (e) => {
     e.preventDefault();
     try {
-      // eslint-disable-next-line no-console
-      console.log('reset password');
-      // send mail
-      // await auth.createUserWithEmailAndPassword(email, password);
+      auth.sendPasswordResetEmail(email).then(setResetAlert(`Please check your ${email} email...`));
+      // implement email sending
     } catch (err) {
       setError(err.message);
     }
@@ -137,7 +136,7 @@ const Form = (prop) => {
           </label>
         </div>
         <button
-          disabled={disabled}
+          disabled={false}
           className={!disabled ? 'signIn-button' : 'signIn-button disabled'}
           onClick={(e) => selectActionOnSubmit(e)}
           type="submit"
@@ -145,7 +144,7 @@ const Form = (prop) => {
           {option === 1 ? 'Sign in' : option === 2 ? 'Sign up' : 'Reset password'}
         </button>
       </form>
-
+      {resetAlert && <h3>{`${resetAlert}`}</h3>}
       <p>By signing-in you agree with Gun Shop AB Tearms and Conditions.</p>
       {error ? <p className="error-fbs">{`Something went wrong: ${error}`}</p> : null}
     </div>
