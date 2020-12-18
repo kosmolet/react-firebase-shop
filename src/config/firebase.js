@@ -2,12 +2,12 @@ import firebase from 'firebase';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: 'eshop-3ac14.firebaseapp.com',
-  projectId: 'eshop-3ac14',
-  storageBucket: 'eshop-3ac14.appspot.com',
-  messagingSenderId: '856737987897',
-  appId: '1:856737987897:web:84af1f1ac25f2c71c5fce8',
-  measurementId: 'G-MB3N0NLBRC'
+  authDomain: 'gunshop-7b627.firebaseapp.com',
+  projectId: 'gunshop-7b627',
+  storageBucket: 'gunshop-7b627.appspot.com',
+  messagingSenderId: '495440092494',
+  appId: '1:495440092494:web:728d1122a50ba655dd921f',
+  measurementId: 'G-8ZE9LCT1P5'
 };
 
 firebase.initializeApp(firebaseConfig);
