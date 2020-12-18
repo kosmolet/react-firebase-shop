@@ -46,13 +46,13 @@ Follow to the links which will appear in the terminal: to see logs and server ba
 ## Deployment to Firebase 
 To deploy project to Firebase => 
 Firebase billing plan should be in a **Blaze** mode.  
-.env variables should be set using ```firebase functions:config:set stripe.key='sk_test_youkey34'``` command
+**.env variables should be set** using ```firebase functions:config:set stripe.key='sk_test_youkey34'``` command
 
 **To deploy backend**: Run ```firebase deploy --only functions``` in root directory of functions folder
 
 **To deploy frontend**: 
 Copy url of deployed backend and replace baseURL link in src/config/axios.js file with your base Url
-*baseURL: `https://us-central1-gunshop-7b633.cloudfunctions.net/api` - example of axios.js base url in deployed mode* 
+*baseURL: `https://us-central1-gunshop-7b633.cloudfunctions.net/api` - example of axios.js base url in production mode* 
 
 Run ```npm run build``` in Root directory of the project
 Run ```firebase deploy --only hosting``` in Root directory of the project
