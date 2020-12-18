@@ -40,22 +40,22 @@ Application is **deployed on Firebase** functions and hosting.
 11. Run ```cd functions``` to navigate to Functions folder. ```npm i ``` to install dependencies for backend.
 12. Run ```firebase emulators:start``` in **functions** directory to start the server. 
 Follow to the links which will appear in the terminal: to see logs and server base url.
-13. Replace baseURL link in src/config/axios.js file with your base Url.
+13. Replace *baseURL* link in *src/config/axios.js* file with your baseURL.
 *baseURL: 'http://localhost:5001/gunshop-7b627/us-central1/api' - example of axios.js base url in development mode* 
 
 ## Deployment to Firebase 
 To deploy project to Firebase => 
-Firebase billing plan should be in a **Blaze** mode.  
+Firebase billing plan should be in the **Blaze** mode.  
 **.env variables should be set** using ```firebase functions:config:set stripe.key='sk_test_youkey34'``` command
 
 **To deploy backend**: Run ```firebase deploy --only functions``` in root directory of functions folder
 
 **To deploy frontend**: 
-Copy url of deployed backend and replace baseURL link in src/config/axios.js file with your base Url
+Copy url of deployed backend and Replace *baseURL* link in *src/config/axios.js* file with your baseURL.
 *baseURL: `https://us-central1-gunshop-7b633.cloudfunctions.net/api` - example of axios.js base url in production mode* 
 
 Run ```npm run build``` in Root directory of the project
-Run ```firebase deploy --only hosting``` in Root directory of the project
+Run ```firebase deploy --only hosting``` in Root directory of the project    
 
 
 
