@@ -1,5 +1,6 @@
-# Panda Gun Shop  
+# Panda Gun Shop 
 
+## Overview
 This a shop to sell water weapons  
 * User can Sign In, Sign Up to the personal account  
 * List of Products is available on the Home page  
@@ -10,20 +11,27 @@ This a shop to sell water weapons
 * Once order is paid - customer is redirected to the Orders page
 * Authenticated users can observe history of purchases on the Orders page  
 
-1. Home page  
+## Architecture Specification  
+For this project implementation it was decided that the server was developed with **Express.js, Firebase functions, firestore, authentification** and the web client with **React.js** library, that is used for building user interfaces. The database uses Firebase **Firestore** as storage. **React Context API** is used for state management.
+Application is **deployed on Firebase** functions and hosting.
+ 
+
+
+
+1. **Home page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-38-35_qoewkv.png)  
 
 
-2. Login page  
+2. **Login page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-45-01_cxx1eq.png)
 
-3. Shopping Cart page  
+3. **Shopping Cart page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-41-42_iose95.png)  
 
-4. Deliver Information and Card details page  
+4. **Deliver Information and Card details page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-09_kqdymt.png)  
 
-5. Orders page  
+5. **Orders page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-30_cwxjf3.png)  
 
 ## Available Scripts
