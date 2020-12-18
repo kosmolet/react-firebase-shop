@@ -10,6 +10,21 @@ This a shop to sell water weapons
 * Once order is paid - customer is redirected to the Orders page
 * Authenticated users can observe history of purchases on the Orders page  
 
+1. Home page  
+![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-38-35_qoewkv.png)  
+
+
+2. Login page  
+![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-45-01_cxx1eq.png)
+
+3. Shopping Cart page  
+![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-41-42_iose95.png)  
+
+4. Deliver Information and Card details page  
+![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-09_kqdymt.png)  
+
+5. Orders page  
+![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-30_cwxjf3.png)  
 
 ## Available Scripts
 
