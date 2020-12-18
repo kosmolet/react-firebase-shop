@@ -22,6 +22,7 @@ Application is **deployed on Firebase** functions and hosting.
  
 ## Installation and Set Up  
 
+0. Clone repo ```https://github.com/kosmolet/gun-shop.git```. ```npm i``` in root of the project folder.
 1. Create [Firebase](https://console.firebase.google.com/u/0/) account. Navigate to Firebase console and create Project there. Check "Also set up Firebase Hosting" checkbox.
 2. ```npm i -g firebase-tools```  
 ```firebase login```   
@@ -33,43 +34,44 @@ Application is **deployed on Firebase** functions and hosting.
 7. Create [Stripe](https://stripe.com/en-se) account and copy Public and Secret keys. 
 8. Add Public Stripe key as ```REACT_APP_PUBLIC_KEY_STRIPE='your_key'``` in .env.development.local file in root folder.
 9. Add Secret Stripe key as ```STRIPE_SK='your_key'``` in .env in functions root directory.
+*const stripe = require('stripe')(process.env.STRIPE_SK); should be in index.js file in functions folder in development mode.*
+10. Run ```npm start``` in root directory to start React project.  
 
-10. ```cd functions``` to navigate to 
+11. Run ```cd functions``` to navigate to Functions folder. ```npm i ``` to install dependencies for backend.
+12. Run ```firebase emulators:start``` in **functions** directory to start the server. 
+Follow to the links which will appear in the terminal: to see logs and server base url.
+13. Replace baseURL link in src/config/axios.js file with your base Url.
+*baseURL: 'http://localhost:5001/gunshop-7b627/us-central1/api' - example of axios.js base url in development mode* 
+
+## Deployment to Firebase 
+To deploy project to Firebase => 
+Firebase billing plan should be in a **Blaze** mode.  
+.env variables should be set using ```firebase functions:config:set stripe.key='sk_test_youkey34'``` command
+
+**To deploy backend**: Run ```firebase deploy --only functions``` in root directory of functions folder
+
+**To deploy frontend**: 
+Copy url of deployed backend and replace baseURL link in src/config/axios.js file with your base Url
+*baseURL: `https://us-central1-gunshop-7b633.cloudfunctions.net/api` - example of axios.js base url in deployed mode* 
+
+Run ```npm run build``` in Root directory of the project
+Run ```firebase deploy --only hosting``` in Root directory of the project
 
 
-1. **Home page**  
+
+ **Home page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-38-35_qoewkv.png)  
 
 
-2. **Login page**  
+ **Login page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-45-01_cxx1eq.png)
 
-3. **Shopping Cart page**  
+ **Shopping Cart page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-41-42_iose95.png)  
 
-4. **Deliver Information and Card details page**  
+ **Deliver Information and Card details page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-09_kqdymt.png)  
 
-5. **Orders page**  
+ **Orders page**  
 ![home](https://res.cloudinary.com/dnkftif1n/image/upload/v1608322707/gun%20shop%20md/2020-12-18_20-44-30_cwxjf3.png)  
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
- 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
