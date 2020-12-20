@@ -1,8 +1,6 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-case-declarations */
+const localData = localStorage.getItem('cart');
 export const initialState = {
-  cart: [],
+  cart: localData ? JSON.parse(localData) : [],
   user: null
 };
 
@@ -24,11 +22,14 @@ const reducer = (state, action) => {
         const updatedProduct = { ...foundProduct, amount: foundProduct.amount + 1 };
         newCartState.splice(index, 1);
         const newState = [...newCartState, updatedProduct];
+        localStorage.setItem('cart', JSON.stringify(newState));
         return {
           ...state,
           cart: newState
         };
       }
+      const newCart = [...state.cart, action.item];
+      localStorage.setItem('cart', JSON.stringify(newCart));
       return {
         ...state,
         cart: [...state.cart, action.item]
@@ -44,6 +45,7 @@ const reducer = (state, action) => {
         // eslint-disable-next-line no-console
         console.warn(`Can't remove product (id: ${action.id}) as its not in the cart`);
       }
+      localStorage.setItem('cart', JSON.stringify(newCartState));
       return {
         ...state,
         cart: newCartState
@@ -57,17 +59,20 @@ const reducer = (state, action) => {
         const updatedProduct = { ...foundProduct, amount: foundProduct.amount - 1 };
         newCartState.splice(index, 1);
         const newState = [...newCartState, updatedProduct];
+        localStorage.setItem('cart', JSON.stringify(newState));
         return {
           ...state,
           cart: newState
         };
       }
+
       return {
         ...state
       };
     }
 
     case 'EMPTY_CART':
+      localStorage.removeItem('cart');
       return {
         ...state,
         cart: []

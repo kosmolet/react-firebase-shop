@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { nanoid } from 'nanoid';
 import './Product.css';
@@ -22,6 +21,7 @@ function Product({ title, image, price, rating, id }) {
       }
     });
   };
+
   return (
     <div className="product-wrapper">
       <div className="product-info-wrapper">
