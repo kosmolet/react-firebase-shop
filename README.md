@@ -1,4 +1,4 @@
-# Panda Gun Shop 
+# Water weapons Shop with React and Firebase 
 
 ## Overview
 
