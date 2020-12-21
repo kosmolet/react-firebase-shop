@@ -1,4 +1,4 @@
-# Water weapons Shop with React and Firebase 
+# Water weapons shop with React and Firebase 
 
 ## Overview
 
